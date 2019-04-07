@@ -9,7 +9,5 @@ import android.widget.TextView
 @BindingAdapter("mutableText")
 fun setMutableText(view: TextView, text: MutableLiveData<String>) {
     val parentActivity: AppCompatActivity? = view.getParentActivity()
-    if (parentActivity != null) {
-        text.observe(parentActivity, Observer { value -> view.text = value ?: "" })
-    }
+    parentActivity.takeIf { null != it }?.let { text.observe(it, Observer { value -> view.text = value ?: "" }) }
 }

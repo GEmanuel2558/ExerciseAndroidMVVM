@@ -8,8 +8,6 @@ import gresanu.emanuel.vasile.project.R
 import gresanu.emanuel.vasile.project.databinding.ActivityMainBinding
 import gresanu.emanuel.vasile.project.di.annotations.PerActivity
 import gresanu.emanuel.vasile.project.extensions.getViewModel
-import gresanu.emanuel.vasile.project.recyclers.adapters.MyAdapter
-import gresanu.emanuel.vasile.project.recyclers.models.Message
 import gresanu.emanuel.vasile.project.ui.activitys.main.viewmodeler.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
