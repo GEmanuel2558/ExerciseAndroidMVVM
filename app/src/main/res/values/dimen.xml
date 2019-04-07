@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="title_size">20sp</dimen>
+    <dimen name="message_size">15sp</dimen>
+
+
+    <!--recycler_item-->
+    <dimen name="card_corners">5dp</dimen>
+    <dimen name="card_content_padding">3dp</dimen>
+
+    <!--activity_main-->
+    <dimen name="margin_recycler_view">8dp</dimen>
+</resources>

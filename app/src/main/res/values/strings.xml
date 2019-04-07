@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ExerciseAndroidMVVM</string>
+    <string name="title_of_the_message">Title of the message</string>
+    <string name="the_message">The Message</string>
 </resources>

@@ -8,4 +8,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="MyTitleStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/title_size</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="MyMessageStyle" parent="MyTitleStyle">
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textSize">@dimen/message_size</item>
+    </style>
+
 </resources>
