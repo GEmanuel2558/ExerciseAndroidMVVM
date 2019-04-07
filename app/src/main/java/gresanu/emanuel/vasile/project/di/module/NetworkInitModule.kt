@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-object NetworkModule {
+object NetworkInitModule {
 
     //Allocate 1 Mb for the cache
     @JvmStatic
