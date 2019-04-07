@@ -39,7 +39,7 @@ inline fun <reified T : ViewModel> AppCompatActivity.withViewModel(
     return vm
 }
 
-
+@SuppressWarnings("unchecked")
 inline fun <reified T : ViewModel> AppCompatActivity.getViewModel(crossinline factory: () -> T): T {
 
     val vmFactory = object : ViewModelProvider.Factory {
@@ -59,7 +59,7 @@ inline fun <reified T : ViewModel> Fragment.withViewModel(
     return vm
 }
 
-
+@SuppressWarnings("unchecked")
 inline fun <reified T : ViewModel> Fragment.getViewModel(crossinline factory: () -> T): T {
 
     val vmFactory = object : ViewModelProvider.Factory {
