@@ -9,8 +9,8 @@ import gresanu.emanuel.vasile.project.ui.activitys.main.MainActivityProviders
 @Module
 abstract class ActivityBuilder {
 
-    @PerActivity
     @ContributesAndroidInjector(modules = arrayOf(MainActivityProviders::class))
+    @PerActivity
     abstract fun bindWithMainActivity(): MainActivity
 
 }
