@@ -1,4 +1,4 @@
-package gresanu.emanuel.vasile.project.ui.activitys
+package gresanu.emanuel.vasile.project.ui.activitys.main
 
 import android.content.Context
 import android.support.v7.widget.LinearLayoutManager

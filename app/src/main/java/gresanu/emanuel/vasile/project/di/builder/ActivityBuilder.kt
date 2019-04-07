@@ -3,8 +3,8 @@ package gresanu.emanuel.vasile.project.di.builder
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import gresanu.emanuel.vasile.project.di.annotations.PerActivity
-import gresanu.emanuel.vasile.project.ui.activitys.MainActivity
-import gresanu.emanuel.vasile.project.ui.activitys.MainActivityProviders
+import gresanu.emanuel.vasile.project.ui.activitys.main.MainActivity
+import gresanu.emanuel.vasile.project.ui.activitys.main.MainActivityProviders
 
 @Module
 abstract class ActivityBuilder {

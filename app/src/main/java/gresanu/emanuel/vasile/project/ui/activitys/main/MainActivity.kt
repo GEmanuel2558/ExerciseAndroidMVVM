@@ -1,4 +1,4 @@
-package gresanu.emanuel.vasile.project.ui.activitys
+package gresanu.emanuel.vasile.project.ui.activitys.main
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
