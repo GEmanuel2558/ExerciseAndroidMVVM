@@ -7,8 +7,10 @@ import gresanu.emanuel.vasile.project.di.component.DaggerAppComponent
 
 class MyApp: DaggerApplication() {
 
+    lateinit var app: AppComponent
+
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        val app: AppComponent = DaggerAppComponent.builder().application(this).build()
+        app = DaggerAppComponent.builder().application(this).build()
         app.inject(this)
         return app
     }

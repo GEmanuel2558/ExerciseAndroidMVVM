@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import gresanu.emanuel.vasile.project.constants.MyConstants.BASE_REQUEST_URL
+import gresanu.emanuel.vasile.project.di.annotations.PerChildren
 import io.reactivex.schedulers.Schedulers
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -22,12 +23,12 @@ object NetworkInitModule {
 
     //Allocate 1 Mb for the cache
     @JvmStatic
-    @Singleton
+    @PerChildren
     @Provides
     internal fun privideCache(context:Context) = Cache(context.cacheDir, (1024*1024))
 
     @JvmStatic
-    @Singleton
+    @PerChildren
     @Provides
     internal fun provideNetworkInterceptor(): HttpLoggingInterceptor {
         val myCustomInterceptor = HttpLoggingInterceptor()
@@ -36,7 +37,7 @@ object NetworkInitModule {
     }
 
     @JvmStatic
-    @Singleton
+    @PerChildren
     @Provides
     internal fun provideOkHttpClient(cache: Cache, interceptor: HttpLoggingInterceptor) = OkHttpClient.Builder()
         .addInterceptor(interceptor)
@@ -44,17 +45,17 @@ object NetworkInitModule {
         .build() as OkHttpClient
 
     @JvmStatic
-    @Singleton
+    @PerChildren
     @Provides
     internal fun provideAdapterFactory() = RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()) as CallAdapter.Factory
 
     @JvmStatic
-    @Singleton
+    @PerChildren
     @Provides
     internal fun provideGsonFactory() = GsonConverterFactory.create(Gson()) as Converter.Factory
 
     @JvmStatic
-    @Reusable
+    @PerChildren
     @Provides
     internal fun proviceRetrofitInterface(convertFactory: Converter.Factory, adapterFactory: CallAdapter.Factory, client: OkHttpClient): Retrofit {
         return Retrofit.Builder()

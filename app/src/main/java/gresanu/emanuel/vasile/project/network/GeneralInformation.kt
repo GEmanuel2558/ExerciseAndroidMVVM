@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 interface GeneralInformation {
 
-    @GET("/getAll")
+    @GET("getAll")
     fun getAllMessages(): Observable<List<Message>>
 }

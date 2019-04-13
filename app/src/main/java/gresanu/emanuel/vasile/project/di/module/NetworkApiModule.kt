@@ -3,6 +3,7 @@ package gresanu.emanuel.vasile.project.di.module
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
+import gresanu.emanuel.vasile.project.di.annotations.PerChildren
 import gresanu.emanuel.vasile.project.network.GeneralInformation
 import retrofit2.Retrofit
 
@@ -10,7 +11,7 @@ import retrofit2.Retrofit
 object NetworkApiModule {
 
     @Provides
-    @Reusable
+    @PerChildren
     @JvmStatic
     internal fun providePostApi(retrofit: Retrofit): GeneralInformation {
         return retrofit.create(GeneralInformation::class.java)

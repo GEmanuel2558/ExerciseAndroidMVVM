@@ -3,11 +3,12 @@ package gresanu.emanuel.vasile.project.ui.activitys.main
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
+import dagger.android.DaggerApplication
 import dagger.android.support.DaggerAppCompatActivity
 import gresanu.emanuel.vasile.project.R
 import gresanu.emanuel.vasile.project.databinding.ActivityMainBinding
 import gresanu.emanuel.vasile.project.di.annotations.PerActivity
-import gresanu.emanuel.vasile.project.extensions.getViewModel
+import gresanu.emanuel.vasile.project.extensions.withViewModel
 import gresanu.emanuel.vasile.project.ui.activitys.main.viewmodeler.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -21,7 +22,7 @@ class MainActivity : DaggerAppCompatActivity() {
     private lateinit var currentView: ActivityMainBinding
 
     private val viewModel by lazy {
-        getViewModel<MainActivityViewModel>(this)
+        withViewModel ({ MainActivityViewModel(application = application as DaggerApplication) }) {}
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +37,7 @@ class MainActivity : DaggerAppCompatActivity() {
         if(::recyclerViewLayoutManager.isInitialized) {
             recyclerView.layoutManager = recyclerViewLayoutManager
         }
+
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {

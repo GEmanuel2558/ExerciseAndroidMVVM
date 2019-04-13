@@ -1,21 +1,23 @@
 package gresanu.emanuel.vasile.project.di.component
 
-import dagger.BindsInstance
-import dagger.Component
+import dagger.Reusable
+import dagger.Subcomponent
+import gresanu.emanuel.vasile.project.di.annotations.PerActivity
+import gresanu.emanuel.vasile.project.di.annotations.PerChildren
 import gresanu.emanuel.vasile.project.di.module.NetworkApiModule
 import gresanu.emanuel.vasile.project.di.module.NetworkInitModule
 import gresanu.emanuel.vasile.project.ui.activitys.main.viewmodeler.MainActivityViewModel
 import gresanu.emanuel.vasile.project.ui.activitys.main.viewmodeler.RecyclerItemViewModel
 
-
-@Component(modules = [NetworkInitModule::class, NetworkApiModule::class])
+@PerChildren
+@Subcomponent(modules = [NetworkInitModule::class, NetworkApiModule::class])
 interface ViewModelInjector {
 
     fun inject(mainActivityViewModel: MainActivityViewModel)
 
     fun inject(recyclerItemViewModel: RecyclerItemViewModel)
 
-    @Component.Builder
+/*    @Component.Builder
     interface MyCustomBuilder {
 
         fun build(): ViewModelInjector
@@ -23,6 +25,9 @@ interface ViewModelInjector {
         @BindsInstance
         fun addNetworkInitModule(networkInit: NetworkInitModule):MyCustomBuilder
 
-    }
+        @BindsInstance
+        fun application(application: Application): MyCustomBuilder
+
+    }*/
 
 }

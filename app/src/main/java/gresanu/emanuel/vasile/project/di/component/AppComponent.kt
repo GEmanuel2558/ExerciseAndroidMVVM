@@ -9,6 +9,7 @@ import dagger.android.support.AndroidSupportInjectionModule
 import gresanu.emanuel.vasile.project.MyApp
 import gresanu.emanuel.vasile.project.di.builder.ActivityBuilder
 import gresanu.emanuel.vasile.project.di.module.AppModule
+import gresanu.emanuel.vasile.project.di.module.NetworkInitModule
 import javax.inject.Singleton
 
 @Singleton
@@ -18,6 +19,10 @@ interface AppComponent: AndroidInjector<DaggerApplication> {
     fun inject(app: MyApp)
 
     override fun inject(instance: DaggerApplication)
+
+    //un provideContext(): Context
+
+    fun dependecySubcomponent(network: NetworkInitModule): ViewModelInjector
 
     @Component.Builder
     interface MyCustomBuilder {
