@@ -1,6 +1,7 @@
 package gresanu.emanuel.vasile.project.ui.activitys.main.viewmodeler
 
 import android.arch.lifecycle.AndroidViewModel
+import android.arch.lifecycle.MutableLiveData
 import android.os.Bundle
 import dagger.android.DaggerApplication
 import gresanu.emanuel.vasile.project.MyApp
@@ -13,6 +14,7 @@ class MainActivityViewModel(application: DaggerApplication): AndroidViewModel(ap
 
     var isNewlyCreated = true
     private val disposable = CompositeDisposable()
+    val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
 
     @Inject
     lateinit var networkCall: GeneralInformation
