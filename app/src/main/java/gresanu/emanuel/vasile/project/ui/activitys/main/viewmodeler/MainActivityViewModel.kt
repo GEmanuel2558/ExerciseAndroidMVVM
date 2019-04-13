@@ -5,8 +5,10 @@ import android.arch.lifecycle.MutableLiveData
 import android.os.Bundle
 import dagger.android.DaggerApplication
 import gresanu.emanuel.vasile.project.MyApp
+import gresanu.emanuel.vasile.project.database.MyDataBase
 import gresanu.emanuel.vasile.project.di.module.NetworkInitModule
 import gresanu.emanuel.vasile.project.network.GeneralInformation
+import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
@@ -21,6 +23,7 @@ class MainActivityViewModel(application: DaggerApplication): AndroidViewModel(ap
 
     init {
         getApplication<MyApp>().app.dependecySubcomponent(NetworkInitModule).inject(this)
+        loadData()
     }
 
     fun onSaveInstance(outState: Bundle) {
@@ -32,10 +35,17 @@ class MainActivityViewModel(application: DaggerApplication): AndroidViewModel(ap
     }
 
     fun loadData(){
-/*        Observable.fromCallable {
-
-        }*/
-
-        //Observable.amb(mutableListOf())
+        val currentDb = MyDataBase.getCurrentDb(getApplication())
+        val network = networkCall.getAllMessages().doOnNext { listOfMessages ->
+            currentDb?.bind()?.let {dao->
+                listOfMessages.forEach {
+                    dao.insertAll(it)
+                }
+            }
+        }
+        val disk = Observable.fromCallable {
+            currentDb?.bind()?.getAll
+        }
+        val onlyTheResponse = Observable.concat(network,disk).first(listOf())
     }
 }
