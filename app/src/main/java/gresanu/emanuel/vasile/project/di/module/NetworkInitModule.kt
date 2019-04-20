@@ -73,9 +73,9 @@ object NetworkInitModule {
     private fun getCacheSizeForMobileDataConnection(tm: TelephonyManager): Long {
         return when (tm.networkType) {
             TelephonyManager.NETWORK_TYPE_LTE or TelephonyManager.NETWORK_TYPE_HSPAP ->
-                DEFAULT_PREFETCH_CACHE shr 2
+                DEFAULT_PREFETCH_CACHE shl 2
             TelephonyManager.NETWORK_TYPE_EDGE or TelephonyManager.NETWORK_TYPE_GPRS ->
-                DEFAULT_PREFETCH_CACHE / 2
+                DEFAULT_PREFETCH_CACHE shr 1
             else -> DEFAULT_PREFETCH_CACHE
         }
     }
