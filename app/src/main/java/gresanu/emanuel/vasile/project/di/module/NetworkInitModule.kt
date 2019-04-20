@@ -6,13 +6,13 @@ import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.NetworkInfo
-import android.os.Build
 import android.telephony.TelephonyManager
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import gresanu.emanuel.vasile.project.constants.MyConstants.BASE_REQUEST_URL
 import gresanu.emanuel.vasile.project.di.annotations.PerChildren
+import gresanu.emanuel.vasile.project.extensions.isCurrentVersionAboveM
 import io.reactivex.schedulers.Schedulers
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -27,8 +27,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module
 object NetworkInitModule {
 
-    const val MAX_PREFETCH_CACHE = (1024 * 1024).toLong()
-    const val DEFAULT_PREFETCH_CACHE = 1024L
+    private const val MAX_PREFETCH_CACHE = (1024 * 1024).toLong()
+    private const val DEFAULT_PREFETCH_CACHE = 1024L
 
     //Allocate 1 Mb for the cache
     @JvmStatic
@@ -36,7 +36,7 @@ object NetworkInitModule {
     @Provides
     internal fun privideCache(context: Context): Cache {
 
-        val prefetchCacheSize = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+        val prefetchCacheSize = if (isCurrentVersionAboveM() &&
             PackageManager.PERMISSION_GRANTED == context.applicationContext.checkSelfPermission(Manifest.permission.ACCESS_NETWORK_STATE)
         ) {
             //https://developer.android.com/training/efficient-downloads/connectivity_patterns.html?authuser=3&hl=ru
@@ -44,7 +44,7 @@ object NetworkInitModule {
             val tm = context.applicationContext.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
             val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (isCurrentVersionAboveM()) {
                 val capabilities = cm.getNetworkCapabilities(cm.activeNetwork)
                 when {
                     capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
@@ -73,7 +73,7 @@ object NetworkInitModule {
     private fun getCacheSizeForMobileDataConnection(tm: TelephonyManager): Long {
         return when (tm.networkType) {
             TelephonyManager.NETWORK_TYPE_LTE or TelephonyManager.NETWORK_TYPE_HSPAP ->
-                DEFAULT_PREFETCH_CACHE * 4
+                DEFAULT_PREFETCH_CACHE shr 2
             TelephonyManager.NETWORK_TYPE_EDGE or TelephonyManager.NETWORK_TYPE_GPRS ->
                 DEFAULT_PREFETCH_CACHE / 2
             else -> DEFAULT_PREFETCH_CACHE
